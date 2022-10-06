@@ -9,15 +9,38 @@ valeurs_float = valeurs.map(&:to_f) # Convertir le tableaux des valeurs en float
 
 bourse = crypto.zip(valeurs_float).to_h # Combine deux array et le transforme en ash
 
+# Question 1
 def maxvalue(hash)
-  # hash.max_by { |a, b| a }
-  hash.key(hash.values.max)
+  hash.max_by { |bourse, values| values }
+  # hash.key(hash.values.max) # Autre possibilité
 end
 
+# Question 2
 def minusvalue(hash)
-  # hash.min_by { |a, b| a}
-  hash.key(hash.values.min)
+  # hash.key(hash.values.min) # Autre possibilité
+  hash.min_by {|bourse, values| values}
 end
 
-puts maxvalue(bourse)
-puts minusvalue(bourse)
+# Question 3
+def lower(hash)
+  hash.select { | crypto, values| values < 6000 }
+end
+
+# Question 4
+def highestfromlower(hash)
+  maxed = lower(hash)
+  maxed.max_by {|crypto, values| values}
+end
+
+def perform(hash)
+  puts '----------Question 1-----------'
+  puts maxvalue(hash)
+  puts '----------Question 2-----------'
+  puts minusvalue(hash)
+  puts '----------Question 3-----------'
+  puts lower(hash)
+  puts '----------Question 4-----------'
+  puts highestfromlower(hash)
+end
+
+puts perform(bourse)
